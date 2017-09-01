@@ -15,7 +15,10 @@ for pic in pic_list:
         os.makedirs(output_user_path)
     local_path = os.path.join(output_user_path, pic.hash + '.jpg')
     dl_url = 'http:' + pic.pic_url
-    urlretrieve(dl_url, local_path)
-    print('Download ' + local_path + ' Success!')
-    update_pic_dl_status(pic.id, new_dl_flag)
+    try:
+        urlretrieve(dl_url, local_path)
+        print('Download ' + local_path + ' Success!')
+        update_pic_dl_status(pic.id, new_dl_flag)
+    except urllib.error.HTTPError as err:  
+        print(err)
     
