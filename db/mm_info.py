@@ -59,3 +59,21 @@ def update_pic_dl_status(id, new_status=1):
 	if r:
 		r.dl_flag = new_status
 	mm_db_session.commit()
+
+def get_max_id_in_mmpic():
+	r = mm_db_session.query(func.max(MMPic.id)).all();
+	if r:
+		return r[0][0]
+
+def get_min_id_in_mmpic():
+	r = mm_db_session.query(func.min(MMPic.id)).all();
+	if r:
+		return r[0][0]
+
+# select * where id >= input limit num
+def fetch_pic_info_from_given_id(given_id, num, status=0):
+	r = mm_db_session.query(MMPic).filter(MMPic.id >= given_id).filter(MMPic.dl_flag == status).limit(num).all()
+	if r:
+		return r
+	else:
+		return []

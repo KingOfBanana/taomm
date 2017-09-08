@@ -8,18 +8,9 @@
 # from utils.random_gen import random_event_occur
 from page_parse.taobaomm import get_image_by_uid
 from db.models import MMPic
-from db.mm_info import insert_mm_pic, check_hash_exist
+from db.mm_info import fetch_pic_info_from_given_id
 
 # test code
 if __name__ == '__main__':
-	test_list = []
-	# print(get_image_by_uid('390324964'))
-	mmpic = MMPic()
-	mmpic.uid = 1
-	test_list.append(mmpic)
-	mmpic = MMPic()
-	mmpic.uid = 2
-	test_list.append(mmpic)
-	insert_mm_pic(test_list)
-	print(check_hash_exist(1, 1, 1, 1))
+	print(fetch_pic_info_from_given_id(110000, 10, 0))
 # end
